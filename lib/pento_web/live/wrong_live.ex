@@ -10,18 +10,19 @@ defmodule PentoWeb.WrongLive do
     ~H"""
     <h1 class="mb-4 text-4xl font-extrabold">Your score: {@score}</h1>
     <h2>{@message}</h2>
-    <h3>{@random}</h3>
 
-    <div>
-      <%= for n <- @range do %>
-        <.link
-          class={"bg-blue-#{if @random == n, do: "400", else: "500"}
+    <div class="my-4">
+      <%= if @score <= @win_threshold do %>
+        <%= for n <- @range do %>
+          <.link
+            class={"bg-blue-#{if @random == n, do: "500", else: "500"}
                  hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-1"}
-          phx-click="guess"
-          phx-value-number={n}
-        >
-          {n}
-        </.link>
+            phx-click="guess"
+            phx-value-number={n}
+          >
+            {n}
+          </.link>
+        <% end %>
       <% end %>
     </div>
 
@@ -74,7 +75,7 @@ defmodule PentoWeb.WrongLive do
   end
 
   defp check_win_condition(%{score: score} = state, win_threshold) when score >= win_threshold do
-    %{state | message: "YOU WON!", score: 0, random: get_random()}
+    %{state | message: "YOU WON!", random: get_random()}
   end
 
   defp check_win_condition(state, _win_threshold), do: state
