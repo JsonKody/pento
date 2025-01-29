@@ -9,6 +9,7 @@ defmodule PentoWeb.WrongLive do
   def render(assigns) do
     ~H"""
     <h1 class="mb-4 text-4xl font-extrabold">Your score: {@score}</h1>
+    
     <h2>{@message}</h2>
 
     <div class="my-4">
