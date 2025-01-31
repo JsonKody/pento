@@ -1,6 +1,6 @@
 defmodule PentoWeb.WrongLive do
   use PentoWeb, :live_view
-  @range 1..3
+  @range 1..5
 
   def mount(_params, _session, socket) do
     {:ok, assign(socket, default_assigns())}
@@ -9,15 +9,15 @@ defmodule PentoWeb.WrongLive do
   def render(assigns) do
     ~H"""
     <h1 class="mb-4 text-4xl font-extrabold">Your score: {@score}</h1>
-    
+
     <h2>{@message}</h2>
 
     <div class="my-4">
       <%= if @score <= @win_threshold do %>
         <%= for n <- @range do %>
           <.link
-            class={"bg-blue-#{if @random == n, do: "500", else: "500"}
-                 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-1"}
+            class="bg-blue-500
+                 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-1"
             phx-click="guess"
             phx-value-number={n}
           >
